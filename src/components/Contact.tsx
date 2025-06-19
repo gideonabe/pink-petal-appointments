@@ -1,42 +1,60 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
 const Contact = () => {
-  const contactMethods = [
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+
+  const socialMedia = [
     {
       platform: "WhatsApp",
-      handle: "+234 XXX XXX XXXX",
-      link: "https://wa.me/234XXXXXXXXX",
       icon: "💬",
+      link: "https://wa.me/234XXXXXXXXX",
       color: "bg-green-500 hover:bg-green-600"
     },
     {
       platform: "Instagram",
-      handle: "@blushbeauty",
-      link: "https://instagram.com/blushbeauty",
       icon: "📸",
+      link: "https://instagram.com/blushbeauty",
       color: "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700"
     },
     {
       platform: "TikTok",
-      handle: "@blushbeauty",
-      link: "https://tiktok.com/@blushbeauty",
       icon: "🎵",
+      link: "https://tiktok.com/@blushbeauty",
       color: "bg-black hover:bg-gray-800"
     },
     {
-      platform: "Email",
-      handle: "hello@blushbeauty.com",
-      link: "mailto:hello@blushbeauty.com",
-      icon: "✉️",
-      color: "bg-pink-500 hover:bg-pink-600"
+      platform: "Facebook",
+      icon: "📘",
+      link: "https://facebook.com/blushbeauty",
+      color: "bg-blue-600 hover:bg-blue-700"
     }
   ];
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    // Handle form submission here
+    alert('Thank you for your message! We will get back to you soon.');
+    setFormData({ name: '', email: '', phone: '', message: '' });
+  };
+
   return (
-    <section id="contact" className="py-20 px-4 bg-gradient-to-b from-pink-50 to-pink-100">
+    <section id="contact" className="py-20 px-4 bg-gradient-to-b from-white to-pink-50">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
@@ -49,94 +67,145 @@ const Contact = () => {
           <div className="h-1 w-24 bg-gradient-to-r from-pink-400 to-pink-600 mx-auto mt-6 rounded-full" />
         </div>
 
-        {/* Contact Methods */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {contactMethods.map((method, index) => (
-            <Card 
-              key={index}
-              className="overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl border-0 bg-white/70 backdrop-blur-sm group"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <CardContent className="p-6 text-center">
-                <div className="text-4xl mb-4">{method.icon}</div>
-                <h3 className="font-playfair text-xl font-semibold text-gray-800 mb-2">
-                  {method.platform}
-                </h3>
-                <p className="font-inter text-gray-600 mb-4 text-sm">
-                  {method.handle}
-                </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-xl">
+            <CardContent className="p-8">
+              <h3 className="font-playfair text-2xl font-semibold text-gray-800 mb-6">
+                Send us a Message
+              </h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200"
+                    placeholder="Enter your email"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200 resize-none"
+                    placeholder="Tell us how we can help you..."
+                  />
+                </div>
                 <Button
-                  asChild
-                  className={`w-full ${method.color} text-white font-inter font-semibold rounded-full transition-all duration-300`}
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white font-inter font-semibold py-3 rounded-lg transition-all duration-300"
                 >
-                  <a href={method.link} target="_blank" rel="noopener noreferrer">
-                    Connect
-                  </a>
+                  Send Message
                 </Button>
+              </form>
+            </CardContent>
+          </Card>
+
+          {/* Social Media & Info */}
+          <div className="space-y-8">
+            {/* Social Media */}
+            <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-xl">
+              <CardContent className="p-8">
+                <h3 className="font-playfair text-2xl font-semibold text-gray-800 mb-6">
+                  Follow Us
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {socialMedia.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${social.color} text-white p-4 rounded-lg text-center transition-all duration-300 hover:scale-105 group`}
+                    >
+                      <div className="text-2xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                        {social.icon}
+                      </div>
+                      <p className="font-inter text-sm font-semibold">
+                        {social.platform}
+                      </p>
+                    </a>
+                  ))}
+                </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
 
-        {/* Location & Hours */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-            <CardContent className="p-8">
-              <h3 className="font-playfair text-2xl font-semibold text-gray-800 mb-6">
-                📍 Visit Our Salon
-              </h3>
-              <div className="space-y-4 font-inter">
-                <div>
-                  <p className="text-gray-700 font-medium">Address:</p>
-                  <p className="text-gray-600">123 Beauty Lane, Victoria Island</p>
-                  <p className="text-gray-600">Lagos, Nigeria</p>
+            {/* Contact Info */}
+            <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-xl">
+              <CardContent className="p-8">
+                <h3 className="font-playfair text-2xl font-semibold text-gray-800 mb-6">
+                  Visit Our Salon
+                </h3>
+                <div className="space-y-4 font-inter">
+                  <div className="flex items-center">
+                    <div className="text-2xl mr-4">📍</div>
+                    <div>
+                      <p className="text-gray-700 font-medium">Address:</p>
+                      <p className="text-gray-600">123 Beauty Lane, Victoria Island</p>
+                      <p className="text-gray-600">Lagos, Nigeria</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="text-2xl mr-4">📞</div>
+                    <div>
+                      <p className="text-gray-700 font-medium">Phone:</p>
+                      <p className="text-gray-600">+234 XXX XXX XXXX</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="text-2xl mr-4">🕐</div>
+                    <div>
+                      <p className="text-gray-700 font-medium">Hours:</p>
+                      <p className="text-gray-600">Mon-Fri: 9AM-6PM</p>
+                      <p className="text-gray-600">Sat: 9AM-5PM, Sun: Closed</p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-gray-700 font-medium">Phone:</p>
-                  <p className="text-gray-600">+234 XXX XXX XXXX</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
-            <CardContent className="p-8">
-              <h3 className="font-playfair text-2xl font-semibold text-gray-800 mb-6">
-                🕐 Opening Hours
-              </h3>
-              <div className="space-y-3 font-inter">
-                <div className="flex justify-between">
-                  <span className="text-gray-700">Monday - Friday</span>
-                  <span className="text-gray-600">9:00 AM - 6:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">Saturday</span>
-                  <span className="text-gray-600">9:00 AM - 5:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-700">Sunday</span>
-                  <span className="text-pink-500">Closed</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Final CTA */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl p-8 text-white">
-            <h3 className="font-playfair text-3xl font-bold mb-4">
-              Ready to Treat Yourself?
-            </h3>
-            <p className="font-inter text-pink-100 mb-6 max-w-md mx-auto">
-              Book your appointment today and let us pamper you with our premium nail care services.
-            </p>
-            <Button 
-              size="lg"
-              className="bg-white text-pink-600 hover:bg-pink-50 font-inter font-semibold px-8 py-4 rounded-full transform hover:scale-105 transition-all duration-300"
-            >
-              Book Now - Special Offer!
-            </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
