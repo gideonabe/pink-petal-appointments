@@ -6,52 +6,58 @@ const Testimonials = () => {
   const testimonials = [
     {
       name: "Sarah Johnson",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face",
+      image: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face&q=80",
       rating: 5,
-      text: "Absolutely love this place! The staff is so professional and my nails always look perfect. The atmosphere is so relaxing and luxurious."
+      text: "Absolutely love this place! The staff is so professional and my nails always look perfect. The atmosphere is so relaxing and luxurious.",
+      treatment: "Royal Combo"
     },
     {
       name: "Maria Rodriguez",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face&q=80",
       rating: 5,
-      text: "Best nail salon in the city! The attention to detail is incredible and they always exceed my expectations. Highly recommend!"
+      text: "Best nail salon in the city! The attention to detail is incredible and they always exceed my expectations. Highly recommend!",
+      treatment: "Luxury Pedicure"
     },
     {
       name: "Emily Chen",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face&q=80",
       rating: 5,
-      text: "I've been coming here for months and I'm never disappointed. The nail art is amazing and the service is top-notch every time."
+      text: "I've been coming here for months and I'm never disappointed. The nail art is amazing and the service is top-notch every time.",
+      treatment: "Deluxe Manicure"
     },
     {
       name: "Jessica Thompson",
-      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
+      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face&q=80",
       rating: 5,
-      text: "The royal combo is my favorite! Such a relaxing experience and my nails stay beautiful for weeks. Worth every penny!"
+      text: "The royal combo is my favorite! Such a relaxing experience and my nails stay beautiful for weeks. Worth every penny!",
+      treatment: "Royal Combo"
     },
     {
       name: "Amanda Wilson",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face&q=80",
       rating: 5,
-      text: "Clean, professional, and absolutely gorgeous results every time. The gel polish lasts so long and the designs are creative."
+      text: "Clean, professional, and absolutely gorgeous results every time. The gel polish lasts so long and the designs are creative.",
+      treatment: "Essential Manicure"
     },
     {
       name: "Lisa Brown",
-      image: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face",
+      image: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face&q=80",
       rating: 5,
-      text: "Amazing experience! The staff makes you feel so pampered and the results are always flawless. My go-to nail salon!"
+      text: "Amazing experience! The staff makes you feel so pampered and the results are always flawless. My go-to nail salon!",
+      treatment: "Glow Combo"
     }
   ];
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
       <span key={i} className={`text-lg ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}>
-        ⭐
+        ★
       </span>
     ));
   };
 
   return (
-    <section id="testimonials" className="py-20 px-4 bg-gradient-to-b from-pink-50 to-white">
+    <section id="testimonials" className="py-20 px-4 bg-gradient-to-br from-pink-50 via-white to-pink-100">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
@@ -69,17 +75,20 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <Card 
               key={index}
-              className="group hover:scale-105 transition-all duration-300 hover:shadow-xl border-0 bg-white/90 backdrop-blur-sm"
+              className="group hover:scale-105 transition-all duration-300 hover:shadow-2xl border-0 bg-white/90 backdrop-blur-sm overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <CardContent className="p-6">
+              <CardContent className="p-6 relative">
+                {/* Decorative element */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-400 to-pink-600" />
+                
                 {/* Stars */}
                 <div className="flex justify-center mb-4">
                   {renderStars(testimonial.rating)}
                 </div>
 
                 {/* Testimonial Text */}
-                <p className="font-inter text-gray-600 text-center mb-6 italic">
+                <p className="font-inter text-gray-700 text-center mb-6 italic leading-relaxed">
                   "{testimonial.text}"
                 </p>
 
@@ -88,14 +97,14 @@ const Testimonials = () => {
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
+                    className="w-14 h-14 rounded-full object-cover mr-4 border-2 border-pink-200"
                   />
-                  <div>
-                    <p className="font-playfair font-semibold text-gray-800">
+                  <div className="text-center">
+                    <p className="font-playfair font-semibold text-gray-800 text-lg">
                       {testimonial.name}
                     </p>
                     <p className="font-inter text-sm text-pink-600">
-                      Verified Client
+                      {testimonial.treatment}
                     </p>
                   </div>
                 </div>
