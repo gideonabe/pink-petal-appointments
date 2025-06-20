@@ -76,7 +76,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="font-inter text-sm text-gray-400">
-            © {currentYear} Blush Beauty. All rights reserved. Made with 💗 for beautiful nails.
+            © {currentYear} Blush Beauty. All rights reserved.
           </p>
         </div>
       </div>
