@@ -40,14 +40,14 @@ const Contact = () => {
       });
   
       if (response.ok) {
-        toast.success('✅ Message sent successfully!');
+        toast.success('Message sent successfully!');
         setFormData({ name: '', email: '', phone: '', message: '' });
       } else {
-        toast.error('❌ Form submission failed.');
+        toast.error('Form submission failed.');
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      toast.error('⚠️ An error occurred while sending your message.');
+      toast.error('An error occurred while sending your message.');
     }
   };
   
