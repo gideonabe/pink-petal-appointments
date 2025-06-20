@@ -21,7 +21,7 @@ const Navigation = () => {
             {/* <h1 className="font-playfair text-3xl font-bold text-pink-600 drop-shadow-lg">
               Blush Beauty
             </h1> */}
-            <h1 className="text-4xl font-playfair font-bold bg-gradient-to-r from-pink-500 via-white to-pink-500 text-transparent bg-clip-text">
+            <h1 onClick={() => scrollToSection('hero')} className="text-4xl cursor-pointer font-playfair font-bold bg-gradient-to-r from-pink-500 via-white to-pink-500 text-transparent bg-clip-text">
               Blush Beauty
             </h1>
 

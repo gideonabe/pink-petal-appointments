@@ -4,6 +4,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 
 const Services = () => {
+
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    el?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+
   const packages = [
     {
       category: "Manicure",
@@ -121,6 +128,7 @@ const Services = () => {
                   </ul>
 
                   <Button 
+                    onClick={() => scrollToSection('booking')}
                     className="w-full bg-pink-500 hover:bg-pink-600 text-white font-inter font-semibold rounded-full transition-all duration-300 border-2 border-pink-400 hover:border-pink-300"
                     size="lg"
                   >
