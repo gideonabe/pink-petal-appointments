@@ -7,10 +7,9 @@ const Hero = () => {
   
   const backgroundImages = [
     'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1920&h=1080&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=1920&h=1080&fit=crop&q=80',
     'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1920&h=1080&fit=crop&q=80',
     'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=1920&h=1080&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920&h=1080&fit=crop&q=80'
+    'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1920&h=1080&fit=crop&q=80'
   ];
 
   useEffect(() => {
@@ -44,7 +43,7 @@ const Hero = () => {
           />
         ))}
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
       {/* Content */}

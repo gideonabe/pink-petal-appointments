@@ -6,7 +6,7 @@ const Testimonials = () => {
   const testimonials = [
     {
       name: "Sarah Johnson",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face&q=80",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZmFjZXxlbnwwfHwwfHx8MA%3D%3D",
       rating: 5,
       text: "Absolutely love this place! The staff is so professional and my nails always look perfect. The atmosphere is so relaxing and luxurious.",
       treatment: "Royal Combo"
@@ -75,7 +75,7 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <Card 
               key={index}
-              className="group hover:scale-105 transition-all duration-300 hover:shadow-2xl border-0 bg-white/90 backdrop-blur-sm overflow-hidden"
+              className="group hover:scale-105 transition-all duration-300 hover:shadow-2xl border-l-gray-400 border-t-0 border-r-gray-400 border-b-0 bg-white/90 backdrop-blur-sm overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardContent className="p-6 relative">

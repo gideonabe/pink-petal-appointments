@@ -11,7 +11,8 @@ const Services = () => {
       price: "₦3,000",
       features: ["Nail trimming & shaping", "Cuticle care", "Polish (basic colors)"],
       popular: false,
-      image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=400&fit=crop&q=80"
+      // image: "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=400&fit=crop&q=80"
+      image: "https://i.pinimg.com/564x/24/51/e7/2451e7db7ffdd114148505937c4ad98a.jpg"
     },
     {
       category: "Manicure",
@@ -19,7 +20,8 @@ const Services = () => {
       price: "₦5,000",
       features: ["Everything in Essential", "Hand massage", "Gel polish or nail art options"],
       popular: true,
-      image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=400&fit=crop&q=80"
+      // image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=400&fit=crop&q=80"
+      image: "https://nailzinbloom.com/wp-content/uploads/2024/08/image-170.png"
     },
     {
       category: "Pedicure",
@@ -27,7 +29,7 @@ const Services = () => {
       price: "₦4,000",
       features: ["Foot soak & exfoliation", "Cuticle and nail grooming", "Polish (basic colors)"],
       popular: false,
-      image: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&h=400&fit=crop&q=80"
+      image: "https://www.auradayspa.co.uk/media/uploads/org/feetpic.jpg"
     },
     {
       category: "Pedicure",
@@ -35,7 +37,7 @@ const Services = () => {
       price: "₦6,500",
       features: ["Everything in Essential", "Foot mask + massage", "Gel polish or French tips"],
       popular: true,
-      image: "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=600&h=400&fit=crop&q=80"
+      image: "https://www.hillarysnails.com.au/cdn/shop/files/shutterstock_442392106_2048x2048-COMPRESSED.png?v=1691307973&width=1946"
     },
     {
       category: "Combo",
@@ -43,7 +45,7 @@ const Services = () => {
       price: "₦7,500",
       features: ["Essential Manicure + Pedicure", "Basic polish", "Quick massage"],
       popular: false,
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&q=80"
+      image: "https://essentialsmassageofbaymeadows.com/wp-content/uploads/2020/04/deluxemanipedi11-scaled.jpeg"
     },
     {
       category: "Combo",
@@ -51,7 +53,8 @@ const Services = () => {
       price: "₦11,000",
       features: ["Deluxe Manicure + Luxury Pedicure", "Gel polish or nail art", "Extended massage + aromatherapy soak"],
       popular: true,
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&q=80"
+      // image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&q=80"
+      image: "https://tiffanynailsandspa.ca/wp-content/uploads/2013/03/manicure-992x1024.jpg"
     }
   ];
 
@@ -138,7 +141,7 @@ const Services = () => {
             variant="outline"
             className="border-pink-300 text-pink-600 hover:bg-pink-50 font-inter font-semibold px-8 py-3 rounded-full"
           >
-            Get Consultation
+            <a href="https://wa.me/+2347053474611">Get Consultation</a>
           </Button>
         </div>
       </div>

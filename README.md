@@ -1,73 +1,71 @@
-# Welcome to your Lovable project
+💅 Blush Beauty Booking System
+📌 Project Overview
+Blush Beauty Booking System is a modern and elegant appointment scheduling platform designed for beauty salons. This web application allows customers to seamlessly book their preferred beauty treatments—such as manicures, pedicures, and combo packages—by selecting a date and time that suits them.
 
-## Project info
+Admins can manage available booking dates, monitor customer bookings in real time, and control appointment slots from a clean dashboard interface.
 
-**URL**: https://lovable.dev/projects/5735150c-2199-4d44-bb36-dbb34fcae0e9
+🚀 Features
+Customer Booking Flow:
 
-## How can I edit this code?
+Choose from a range of curated beauty packages.
 
-There are several ways of editing your application.
+Select a date and preferred time slot between salon hours (9:00 AM – 5:00 PM).
 
-**Use Lovable**
+Submit personal information for confirmation.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5735150c-2199-4d44-bb36-dbb34fcae0e9) and start prompting.
+Receive booking feedback and success notifications.
 
-Changes made via Lovable will be committed automatically to this repo.
+Admin Panel:
 
-**Use your preferred IDE**
+Add or remove available booking dates.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Monitor customer bookings with full details.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Delete unbooked slots directly from the dashboard.
 
-Follow these steps:
+Automatic syncing and status updates.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+Responsive UI:
+
+Built with a focus on clean design and mobile-first responsiveness.
+
+Friendly interface powered by Tailwind CSS and ShadCN UI components.
+
+🛠️ Tech Stack
+Framework: React (with Vite)
+
+Language: TypeScript
+
+Styling: Tailwind CSS, ShadCN UI
+
+Data Management: Google Sheets as a backend (via Google Apps Script)
+
+🧪 Getting Started Locally
+To run this project on your local machine:
+
+bash
+Copy
+Edit
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to the project directory
+cd blush-beauty-booking
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
-```
+🌐 Deployment
+This project can be deployed to any modern static hosting platform (e.g., Vercel, Netlify). Make sure your connected Google Apps Script endpoint is accessible for the booking functionality.
 
-**Edit a file directly in GitHub**
+📅 Admin Notes
+Admins only need to set available dates—time slots are automatically handled in the frontend.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Slots marked as booked cannot be deleted to preserve data integrity.
 
-**Use GitHub Codespaces**
+Booking submissions automatically mark the selected date as booked.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/5735150c-2199-4d44-bb36-dbb34fcae0e9) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+✨ Credits
+Developed with care to simplify and enhance the appointment booking experience for beauty salons and their clients.

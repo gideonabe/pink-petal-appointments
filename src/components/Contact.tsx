@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MessageCircle, Instagram, Send, Phone } from 'lucide-react';
+import {toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -22,38 +24,60 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission here
+  
+    try {
+      const response = await fetch('https://formspree.io/f/xrbgwjyb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        }),
+      });
+  
+      if (response.ok) {
+        toast.success('✅ Message sent successfully!');
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      } else {
+        toast.error('❌ Form submission failed.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('⚠️ An error occurred while sending your message.');
+    }
   };
+  
 
   const socialLinks = [
     {
       name: 'WhatsApp',
       icon: MessageCircle,
-      href: 'https://wa.me/2348123456789',
+      href: 'https://wa.me/+2347053474611',
       color: 'bg-green-500 hover:bg-green-600',
       description: 'Chat with us instantly'
     },
     {
       name: 'Instagram',
       icon: Instagram,
-      href: 'https://instagram.com/blushbeauty',
+      href: 'https://instagram.com/gideonabe',
       color: 'bg-pink-500 hover:bg-pink-600',
       description: 'Follow our latest work'
     },
     {
       name: 'TikTok',
       icon: Send,
-      href: 'https://tiktok.com/@blushbeauty',
+      href: 'https://tiktok.com/gideon_abe',
       color: 'bg-black hover:bg-gray-800',
       description: 'Watch nail art tutorials'
     },
     {
       name: 'Call Us',
       icon: Phone,
-      href: 'tel:+2348123456789',
+      href: 'tel:+2347053474611',
       color: 'bg-blue-500 hover:bg-blue-600',
       description: 'Speak with our team'
     }
@@ -75,7 +99,7 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Contact Form */}
-          <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+          <Card className="bg-white/80 backdrop-blur-sm border-pink-300 shadow-xl">
             <CardHeader>
               <CardTitle className="font-playfair text-2xl text-gray-800 text-center">
                 Send Us a Message
@@ -85,7 +109,7 @@ const Contact = () => {
               </p>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6 ">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -165,7 +189,7 @@ const Contact = () => {
             {/* Salon Image */}
             <div className="relative overflow-hidden rounded-2xl shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&h=600&fit=crop&q=80"
+                src="https://images.pexels.com/photos/705255/pexels-photo-705255.jpeg"
                 alt="Blush Beauty Salon Interior"
                 className="w-full h-64 md:h-80 object-cover"
               />
@@ -217,6 +241,20 @@ const Contact = () => {
           </div>
         </div>
       </div>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
     </section>
   );
 };

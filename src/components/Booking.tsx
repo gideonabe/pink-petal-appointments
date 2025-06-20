@@ -1,19 +1,14 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Booking = () => {
-  // Commented out for future use
-  /*
   const [selectedPackage, setSelectedPackage] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
-  const [customerInfo, setCustomerInfo] = useState({
-    name: '',
-    email: '',
-    phone: ''
-  });
+  const [bookedSlots, setBookedSlots] = useState({});
+  const [customerInfo, setCustomerInfo] = useState({ name: '', email: '', phone: '' });
 
   const packages = [
     { id: 'essential-manicure', name: 'Essential Manicure', price: '₦3,000' },
@@ -24,87 +19,95 @@ const Booking = () => {
     { id: 'royal-combo', name: 'Royal Combo', price: '₦11,000' }
   ];
 
-  // Mock available slots - would come from admin settings
-  const availableSlots = {
-    '2024-01-15': ['09:00', '10:30', '14:00', '15:30'],
-    '2024-01-16': ['09:00', '11:00', '13:30', '16:00'],
-    '2024-01-17': ['10:00', '11:30', '14:30', '16:30']
-  };
+  // Predefined available time slots (from 9:00 to 5:00pm, every 1 hour)
+  const timeSlots = [
+    '09:00', '10:00', '11:00',
+    '12:00', '13:00', '14:00',
+    '15:00', '16:00'
+  ];
 
-  const handleBooking = (e: React.FormEvent) => {
+  useEffect(() => {
+    const fetchSlots = async () => {
+      try {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbyGRG5Tl5_wEt4vtCEA_ndmazTSTxHN5yb0hVJfGdwACNe0Dr4JF1gNwPTK7myKIy8PGg/exec');
+        const data = await res.json();
+
+        const grouped = {};
+        data.slots.forEach(slot => {
+          if (!grouped[slot.date]) grouped[slot.date] = [];
+          if (slot.isBooked === true || slot.isBooked === 'TRUE') {
+            grouped[slot.date].push(slot.time);
+          }
+        });
+
+        setBookedSlots(grouped); // now only contains booked times per admin-set date
+      } catch (err) {
+        console.error('Failed to load slots:', err);
+      }
+    };
+
+    fetchSlots();
+  }, []);
+
+  const handleBooking = async (e) => {
     e.preventDefault();
-    console.log('Booking submitted:', {
+
+    const payload = {
+      name: customerInfo.name,
+      email: customerInfo.email,
+      phone: customerInfo.phone,
       package: selectedPackage,
       date: selectedDate,
       time: selectedTime,
-      customer: customerInfo
-    });
-    alert('Booking request submitted! We will confirm your appointment soon.');
+    };
+
+    const query = new URLSearchParams(payload).toString();
+
+    try {
+      const response = await fetch(`https://script.google.com/macros/s/AKfycbyGRG5Tl5_wEt4vtCEA_ndmazTSTxHN5yb0hVJfGdwACNe0Dr4JF1gNwPTK7myKIy8PGg/exec?${query}`);
+
+      if (response.ok) {
+        toast.success('Booking submitted successfully!', {
+          className: 'bg-white text-pink-600 border border-pink-300 shadow-md',
+        });
+
+        // Reset
+        setCustomerInfo({ name: '', email: '', phone: '' });
+        setSelectedPackage('');
+        setSelectedDate('');
+        setSelectedTime('');
+      } else {
+        toast.error('Booking failed. Try again.');
+      }
+    } catch (err) {
+      toast.error('Network error!');
+    }
   };
-  */
+
+  const slotDates = Object.keys(bookedSlots); // only show admin-set dates
 
   return (
-    <section id="booking" className="py-20 px-4 bg-gradient-to-b from-pink-50 to-white">
+    <section className="py-20 px-4 bg-gradient-to-b from-pink-50 to-white">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="font-playfair text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            Book Your Appointment
-          </h2>
-          <p className="font-inter text-lg text-gray-600 max-w-2xl mx-auto">
-            Choose your preferred package, date, and time to book your perfect nail care experience.
-          </p>
+        <div className="text-center mb-16">
+          <h2 className="font-playfair text-4xl font-bold text-gray-800">Book Your Appointment</h2>
+          <p className="font-inter text-lg text-gray-600 mt-4">Choose package, date, and time to book.</p>
           <div className="h-1 w-24 bg-gradient-to-r from-pink-400 to-pink-600 mx-auto mt-6 rounded-full" />
         </div>
 
         <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-xl">
-          <CardHeader>
-            <CardTitle className="font-playfair text-2xl text-center text-gray-800">
-              Online Booking Coming Soon!
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-8 text-center">
-            <div className="text-6xl mb-6">🚧</div>
-            <p className="font-inter text-gray-600 mb-8">
-              We're working on our online booking system to make scheduling your appointments even easier. 
-              In the meantime, please contact us directly to book your appointment.
-            </p>
-            <div className="space-y-4">
-              <Button
-                onClick={() => window.open('https://wa.me/234XXXXXXXXX', '_blank')}
-                className="bg-green-500 hover:bg-green-600 text-white font-inter font-semibold px-8 py-3 rounded-full mr-4"
-              >
-                Book via WhatsApp
-              </Button>
-              <Button
-                onClick={() => window.location.href = 'tel:+234XXXXXXXXX'}
-                className="bg-pink-500 hover:bg-pink-600 text-white font-inter font-semibold px-8 py-3 rounded-full"
-              >
-                Call to Book
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Commented out booking form for future implementation */}
-        {/*
-        <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-xl">
           <CardContent className="p-8">
-            <form onSubmit={handleBooking} className="space-y-8">
-              // Step 1: Choose Package
+            <form onSubmit={handleBooking} className="space-y-10">
+              {/* Step 1 - Packages */}
               <div>
-                <h3 className="font-playfair text-xl font-semibold text-gray-800 mb-4">
-                  1. Choose Your Package
-                </h3>
+                <h3 className="font-playfair text-xl font-semibold mb-4">1. Choose Package</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {packages.map((pkg) => (
                     <div
                       key={pkg.id}
                       onClick={() => setSelectedPackage(pkg.id)}
-                      className={`p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
-                        selectedPackage === pkg.id
-                          ? 'border-pink-500 bg-pink-50'
-                          : 'border-gray-200 hover:border-pink-300'
+                      className={`p-4 border-2 rounded-lg cursor-pointer ${
+                        selectedPackage === pkg.id ? 'border-pink-500 bg-pink-50' : 'border-gray-200'
                       }`}
                     >
                       <h4 className="font-inter font-semibold text-gray-800">{pkg.name}</h4>
@@ -114,99 +117,93 @@ const Booking = () => {
                 </div>
               </div>
 
-              // Step 2: Choose Date
+              {/* Step 2 - Date */}
               <div>
-                <h3 className="font-playfair text-xl font-semibold text-gray-800 mb-4">
-                  2. Select Date
-                </h3>
-                <div className="grid grid-cols-3 gap-4">
-                  {Object.keys(availableSlots).map((date) => (
+                <h3 className="font-playfair text-xl font-semibold mb-4">2. Select Date</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {slotDates.map(date => (
                     <div
                       key={date}
                       onClick={() => setSelectedDate(date)}
-                      className={`p-4 text-center border-2 rounded-lg cursor-pointer transition-all duration-200 ${
-                        selectedDate === date
-                          ? 'border-pink-500 bg-pink-50'
-                          : 'border-gray-200 hover:border-pink-300'
+                      className={`p-4 border-2 rounded-lg text-center cursor-pointer ${
+                        selectedDate === date ? 'border-pink-500 bg-pink-50' : 'border-gray-200'
                       }`}
                     >
-                      <p className="font-inter font-semibold text-gray-800">
-                        {new Date(date).toLocaleDateString()}
-                      </p>
+                      <p className="font-inter font-semibold">{new Date(date).toLocaleDateString('en-GB')}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              // Step 3: Choose Time
+              {/* Step 3 - Time */}
               {selectedDate && (
                 <div>
-                  <h3 className="font-playfair text-xl font-semibold text-gray-800 mb-4">
-                    3. Select Time
-                  </h3>
+                  <h3 className="font-playfair text-xl font-semibold mb-4">3. Select Time</h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {availableSlots[selectedDate]?.map((time) => (
-                      <div
-                        key={time}
-                        onClick={() => setSelectedTime(time)}
-                        className={`p-3 text-center border-2 rounded-lg cursor-pointer transition-all duration-200 ${
-                          selectedTime === time
-                            ? 'border-pink-500 bg-pink-50'
-                            : 'border-gray-200 hover:border-pink-300'
-                        }`}
-                      >
-                        <p className="font-inter font-semibold text-gray-800">{time}</p>
-                      </div>
-                    ))}
+                    {timeSlots.map((time) => {
+                      const isBooked = bookedSlots[selectedDate]?.includes(time);
+                      return (
+                        <div
+                          key={time}
+                          onClick={() => !isBooked && setSelectedTime(time)}
+                          className={`p-3 border-2 rounded-lg text-center cursor-pointer ${
+                            selectedTime === time ? 'border-pink-500 bg-pink-50' :
+                            isBooked ? 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed' : 'border-gray-200'
+                          }`}
+                        >
+                          <p className="font-inter font-semibold">{time}</p>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
 
-              // Step 4: Customer Information
+              {/* Step 4 - Customer Info */}
               <div>
-                <h3 className="font-playfair text-xl font-semibold text-gray-800 mb-4">
-                  4. Your Information
-                </h3>
+                <h3 className="font-playfair text-xl font-semibold mb-4">4. Your Information</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input
                     type="text"
                     placeholder="Full Name"
                     value={customerInfo.name}
-                    onChange={(e) => setCustomerInfo({...customerInfo, name: e.target.value})}
-                    className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500"
+                    onChange={(e) => setCustomerInfo({ ...customerInfo, name: e.target.value })}
                     required
+                    className="px-4 py-3 border border-gray-300 rounded-lg"
                   />
                   <input
                     type="email"
-                    placeholder="Email Address"
+                    placeholder="Email"
                     value={customerInfo.email}
-                    onChange={(e) => setCustomerInfo({...customerInfo, email: e.target.value})}
-                    className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500"
+                    onChange={(e) => setCustomerInfo({ ...customerInfo, email: e.target.value })}
                     required
+                    className="px-4 py-3 border border-gray-300 rounded-lg"
                   />
                   <input
                     type="tel"
                     placeholder="Phone Number"
                     value={customerInfo.phone}
-                    onChange={(e) => setCustomerInfo({...customerInfo, phone: e.target.value})}
-                    className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500"
+                    onChange={(e) => setCustomerInfo({ ...customerInfo, phone: e.target.value })}
                     required
+                    className="px-4 py-3 border border-gray-300 rounded-lg"
                   />
                 </div>
               </div>
 
+              {/* Submit */}
               <Button
                 type="submit"
                 disabled={!selectedPackage || !selectedDate || !selectedTime}
-                className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white font-inter font-semibold py-4 text-lg rounded-lg transition-all duration-300 disabled:opacity-50"
+                className="w-full bg-pink-500 hover:bg-pink-600 text-white text-lg font-inter font-semibold py-4 rounded-lg"
               >
                 Confirm Booking
               </Button>
             </form>
           </CardContent>
         </Card>
-        */}
       </div>
+
+      <ToastContainer position="top-right" autoClose={4000} />
     </section>
   );
 };
