@@ -87,7 +87,7 @@ const Booking = () => {
   const slotDates = Object.keys(bookedSlots); // only show admin-set dates
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-pink-50 to-white">
+    <section id='booking' className="py-20 px-4 bg-gradient-to-b from-pink-50 to-white">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-playfair text-4xl font-bold text-gray-800">Book Your Appointment</h2>
