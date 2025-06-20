@@ -6,6 +6,8 @@ const Footer = () => {
     el?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-gray-900 text-white py-12 px-4">
       <div className="max-w-6xl mx-auto">
@@ -74,7 +76,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="font-inter text-sm text-gray-400">
-            © 2024 Blush Beauty. All rights reserved. Made with 💖 for beautiful nails.
+            © {currentYear} Blush Beauty. All rights reserved. Made with 💗 for beautiful nails.
           </p>
         </div>
       </div>
