@@ -227,7 +227,7 @@ const Contact = () => {
             </div>
 
             {/* Location Info */}
-            <Card className="bg-gradient-to-br from-pink-50 to-white border-0 shadow-lg">
+            <Card className="bg-gradient-to-br from-pink-50 to-white border-2 shadow-lg border-l-4 border-r-4 border-pink-300">
               <CardContent className="p-6">
                 <h3 className="font-playfair text-xl font-bold text-gray-800 mb-4">Visit Us</h3>
                 <div className="space-y-3 text-gray-600">

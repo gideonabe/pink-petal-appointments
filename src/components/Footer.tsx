@@ -1,7 +1,11 @@
-
 import React from 'react';
 
 const Footer = () => {
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    el?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <footer className="bg-gray-900 text-white py-12 px-4">
       <div className="max-w-6xl mx-auto">
@@ -20,10 +24,38 @@ const Footer = () => {
           <div className="text-center">
             <h4 className="font-inter font-semibold text-lg mb-4">Quick Links</h4>
             <ul className="space-y-2 font-inter text-sm">
-              <li><a href="#services" className="text-gray-300 hover:text-pink-400 transition-colors">Services</a></li>
-              <li><a href="#contact" className="text-gray-300 hover:text-pink-400 transition-colors">Contact</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-pink-400 transition-colors">Book Appointment</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-pink-400 transition-colors">Gift Cards</a></li>
+              <li>
+                <button
+                  onClick={() => scrollToSection('services')}
+                  className="text-gray-300 hover:text-pink-400 transition-colors"
+                >
+                  Services
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="text-gray-300 hover:text-pink-400 transition-colors"
+                >
+                  Contact
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection('booking')}
+                  className="text-gray-300 hover:text-pink-400 transition-colors"
+                >
+                  Book Appointment
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection('giftcards')}
+                  className="text-gray-300 hover:text-pink-400 transition-colors"
+                >
+                  Gift Cards
+                </button>
+              </li>
             </ul>
           </div>
 
