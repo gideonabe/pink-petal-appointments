@@ -10,7 +10,7 @@ import AnalyticsTracker from "./components/AnalyticsTracker";
 
 const queryClient = new QueryClient();
 
-const GA_MEASUREMENT_ID = import.meta.env.REACT_APP_GA_MEASUREMENT_ID;
+const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID;
 // const GA_MEASUREMENT_ID = process.env.REACT_APP_GA_MEASUREMENT_ID || 'G-YOUR_MEASUREMENT_ID'; // Fallback for dev
 
 const App = () => (
